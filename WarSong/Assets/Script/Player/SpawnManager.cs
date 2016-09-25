@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour {
     private bool checkSpawnDoing = false;
-    private GameObject newCircleUnit;
+    private GameObject newUnit;
 
     public int playerNumber;
     public CircleUnitScript circleUnit;
@@ -18,16 +18,16 @@ public class SpawnManager : MonoBehaviour {
         if(!checkSpawnDoing)
         {
             checkSpawnDoing = true;
-            newCircleUnit = (GameObject)Instantiate(circleUnit.gameObject);
+            newUnit = (GameObject)Instantiate(circleUnit.gameObject);
         }
     }
 
     public void SpawnUnit(LineScript line)
     {
         Debug.Log("Spawn");
-        newCircleUnit.transform.SetParent(lineList[line.lineNumber].transform);
-        newCircleUnit.transform.localPosition = new Vector3(80, line.transform.localPosition.y, 0);
-        newCircleUnit.SetActive(true);
+        newUnit.transform.SetParent(lineList[line.lineNumber].transform);
+        newUnit.transform.localPosition = new Vector3(-650, -162.5f, 0);
+        newUnit.SetActive(true);
         checkSpawnDoing = false;
     }
 }
