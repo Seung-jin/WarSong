@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class UnitScript : MonoBehaviour {
-    public int playerNumber;
+    public int playerNumber;    //플레이어 번호
     private int currentHP;
     private int maxHP;
     private int arrange;
     private int damage;
     private int moveSpeed;
     private bool checkCanMove = true;
+
+    public SpawnManager spawnManager;
 
     public int getPlayerNumber() { return playerNumber; }
     public int getMaxHP() { return maxHP; }
@@ -41,11 +44,19 @@ public class UnitScript : MonoBehaviour {
 
     public virtual void Move()
     {
-        if(playerNumber == 1 && checkCanMove)
-        {
-            print("Move");
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x + moveSpeed,
-                gameObject.transform.localPosition.y, 0);
-        }
+        print("Move");
+    }
+
+    public virtual void Initialize()
+    {
+        print("Initialize");
+
+        playerNumber = spawnManager.playerNumber;
+        checkCanMove = true;
+    }
+
+    public enum unitType
+    {
+        Circle,
     }
 }

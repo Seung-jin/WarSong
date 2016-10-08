@@ -15,7 +15,22 @@ public class CircleUnitScript : UnitScript {
     void Update()
     {
         Move();
-        print(getCheckCanMove() + "   " + getPlayerNumber());
+    }
+
+    public override void Move()
+    {
+        if (playerNumber == 1 && getCheckCanMove())
+        {
+            print("move");
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x + getMoveSpeed(),
+                gameObject.transform.localPosition.y, 0);
+        }
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
     }
 
     public CircleUnitScript(int maxHP, int arrange, int damage, int moveSpeed)
