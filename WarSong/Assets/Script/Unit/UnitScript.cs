@@ -10,6 +10,7 @@ public class UnitScript : MonoBehaviour {
     private int damage;
     private int moveSpeed;
     private bool checkCanMove = true;
+    private UnitType unitType;
 
     public SpawnManager spawnManager;
 
@@ -19,6 +20,7 @@ public class UnitScript : MonoBehaviour {
     public int getDamage() { return damage; }
     public int getMoveSpeed() { return moveSpeed; }
     public bool getCheckCanMove() { return checkCanMove; }
+    public UnitType getUnitType() { return unitType; }
 
     public void setPlayerNumber(int playerNumber) { this.playerNumber = playerNumber; }
     public void setMaxHP(int maxHP) { this.maxHP = maxHP; }
@@ -27,6 +29,7 @@ public class UnitScript : MonoBehaviour {
     public void setDamage(int damage) { this.damage = damage; }
     public void setMoveSpeed(int moveSpeed) { this.moveSpeed = moveSpeed; }
     public void setCheckCanMove(bool checkCanMove) { this.checkCanMove = checkCanMove; }
+    public void setUnitType(UnitType unitType) { this.unitType = unitType; }
 
     public UnitScript(int maxHP, int arrange, int damage, int moveSpeed)
     {
@@ -55,7 +58,7 @@ public class UnitScript : MonoBehaviour {
         checkCanMove = true;
     }
 
-    public enum unitType
+    public enum UnitType
     {
         Circle,
     }

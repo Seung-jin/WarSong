@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class SpawnManager : MonoBehaviour {
     private bool checkSpawnDoing = false;   //소환 대기중인지 아닌지. 유닛 소환 버튼을 누르면 true상태
     private GameObject newUnit;
-    private UnitScript.unitType unitType;
+    private UnitScript.UnitType unitType;
 
     public int playerNumber;
     public List<GameObject> lineList = new List<GameObject>();
@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour {
         if(!checkSpawnDoing)
         {
             checkSpawnDoing = true;
-            unitType = UnitScript.unitType.Circle;
+            unitType = UnitScript.UnitType.Circle;
             newUnit = (GameObject)Instantiate(unitList[(int)unitType]);
             CircleUnitScript circleUnit = newUnit.GetComponent<CircleUnitScript>();
             circleUnit.Initialize();
