@@ -47,9 +47,20 @@ public class UnitScript : MonoBehaviour {
         this.moveSpeed = moveSpeed;
     }
 
-    public virtual void Attack()
+    public virtual IEnumerator Attack(UnitScript enemy)
     {
-        print("Attack!!");
+        enemy.setCurrentHP(enemy.getCurrentHP() - getDamage());
+
+        if (enemy.getCurrentHP() > 0)
+        {
+            yield return new WaitForSeconds(1);
+            StartCoroutine(Attack(enemy));
+        }
+        else
+        {
+            checkCanMove = true;
+            Destroy(enemy.gameObject);
+        }
     }
 
     public virtual void Move()

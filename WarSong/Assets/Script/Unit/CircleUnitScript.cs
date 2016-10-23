@@ -19,13 +19,18 @@ public class CircleUnitScript : UnitScript {
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x + getMoveSpeed(),
                 gameObject.transform.localPosition.y, 0);
         }
+        else if(playerNumber == 2 && getCheckCanMove())
+        {
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x - getMoveSpeed(),
+                gameObject.transform.localPosition.y, 0);
+        }
     }
 
     public override void Initialize()
     {
         base.Initialize();
-        setMaxHP(100);
-        setCurrentHP(100);
+        setMaxHP(10);
+        setCurrentHP(getMaxHP());
         setArrange(500);
         setDamage(3);
         setMoveSpeed(5);
@@ -53,17 +58,15 @@ public class CircleUnitScript : UnitScript {
             setCheckCanMove(false);
             StartCoroutine(Attack(colliderUnit));
         }
+        else if(playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
+        {
+            setCheckCanMove(false);
+            StartCoroutine(Attack(colliderUnit));
+        }
     }
 
-    IEnumerator Attack(UnitScript enemy)
+    public override IEnumerator Attack(UnitScript enemy)
     {
-        enemy.setCurrentHP(enemy.getCurrentHP() - getDamage());
-        print(enemy.getCurrentHP());
-
-        if(enemy.getCurrentHP() > 0)
-        {
-            yield return new WaitForSeconds(1);
-            StartCoroutine(Attack(enemy));
-        }
+        return base.Attack(enemy);
     }
 }

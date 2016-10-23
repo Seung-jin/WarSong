@@ -19,13 +19,14 @@ public class SpawnManager : MonoBehaviour {
     /// </summary>
     public void OnClickCircleUnitButton()
     {
-        Debug.Log("CircleButton Click");
+        Debug.Log(playerNumber + "player : CircleButton Click");
         if(!checkSpawnDoing)
         {
             checkSpawnDoing = true;
             unitType = UnitScript.UnitType.Circle;
             newUnit = (GameObject)Instantiate(unitList[(int)unitType]);
             CircleUnitScript circleUnit = newUnit.GetComponent<CircleUnitScript>();
+            circleUnit.spawnManager = this;
             circleUnit.Initialize();
         }
     }
@@ -38,7 +39,10 @@ public class SpawnManager : MonoBehaviour {
     {
         Debug.Log("Spawn");
         newUnit.transform.SetParent(lineList[line.lineNumber].transform);
-        newUnit.transform.localPosition = new Vector3(-650, -162.5f, 0);
+        if (playerNumber == 1)
+            newUnit.transform.localPosition = new Vector3(-650, -162.5f, 0);
+        else if (playerNumber == 2)
+            newUnit.transform.localPosition = new Vector3(650, -162.5f, 0);
         newUnit.SetActive(true);
         checkSpawnDoing = false;
     }
