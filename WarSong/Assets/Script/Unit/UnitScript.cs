@@ -4,8 +4,8 @@ using System.Collections;
 
 public class UnitScript : MonoBehaviour {
     public int playerNumber;    //플레이어 번호
-    private int currentHP;
-    private int maxHP;
+    public float currentHP = 100;
+    public float maxHP = 100;
     private int arrange;
     private int damage;
     private int moveSpeed;
@@ -13,9 +13,11 @@ public class UnitScript : MonoBehaviour {
     private UnitType unitType;
 
     public SpawnManager spawnManager;
+    public Image hpGuage;
 
     public int getPlayerNumber() { return playerNumber; }
-    public int getMaxHP() { return maxHP; }
+    public float getMaxHP() { return maxHP; }
+    public float getCurrentHP() { return currentHP; }
     public int getArrange() { return arrange; }
     public int getDamage() { return damage; }
     public int getMoveSpeed() { return moveSpeed; }
@@ -23,13 +25,18 @@ public class UnitScript : MonoBehaviour {
     public UnitType getUnitType() { return unitType; }
 
     public void setPlayerNumber(int playerNumber) { this.playerNumber = playerNumber; }
-    public void setMaxHP(int maxHP) { this.maxHP = maxHP; }
-    public void setCurrentHP(int currentHP) { this.currentHP = currentHP; }
+    public void setMaxHP(float maxHP) { this.maxHP = maxHP; }
+    public void setCurrentHP(float currentHP) { this.currentHP = currentHP; }
     public void setArrange(int arrange) { this.arrange = arrange; }
     public void setDamage(int damage) { this.damage = damage; }
     public void setMoveSpeed(int moveSpeed) { this.moveSpeed = moveSpeed; }
     public void setCheckCanMove(bool checkCanMove) { this.checkCanMove = checkCanMove; }
     public void setUnitType(UnitType unitType) { this.unitType = unitType; }
+    
+    public void SettingHPGuage()
+    {
+        hpGuage.fillAmount = currentHP / maxHP;
+    }
 
     public UnitScript(int maxHP, int arrange, int damage, int moveSpeed)
     {

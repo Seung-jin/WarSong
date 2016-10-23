@@ -9,6 +9,7 @@ public class CircleUnitScript : UnitScript {
     void Update()
     {
         Move();
+        base.SettingHPGuage();
     }
 
     public override void Move()
@@ -45,10 +46,24 @@ public class CircleUnitScript : UnitScript {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Unit")
+        UnitScript colliderUnit = other.gameObject.GetComponent<UnitScript>();
+
+        if(playerNumber == 1 && colliderUnit.getPlayerNumber() == 2)
         {
             setCheckCanMove(false);
-            other.GetComponent<UnitScript>().setCurrentHP(getDamage());
+            StartCoroutine(Attack(colliderUnit));
+        }
+    }
+
+    IEnumerator Attack(UnitScript enemy)
+    {
+        enemy.setCurrentHP(enemy.getCurrentHP() - getDamage());
+        print(enemy.getCurrentHP());
+
+        if(enemy.getCurrentHP() > 0)
+        {
+            yield return new WaitForSeconds(1);
+            StartCoroutine(Attack(enemy));
         }
     }
 }
