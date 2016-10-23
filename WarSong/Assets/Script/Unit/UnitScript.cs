@@ -47,6 +47,47 @@ public class UnitScript : MonoBehaviour {
         this.moveSpeed = moveSpeed;
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Unit")
+        {
+            UnitScript colliderUnit = other.gameObject.GetComponent<UnitScript>();
+
+            if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2)
+            {
+                setCheckCanMove(false);
+                StartCoroutine(Attack(colliderUnit));
+            }
+            else if (playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
+            {
+                setCheckCanMove(false);
+                StartCoroutine(Attack(colliderUnit));
+            }
+        }
+        else if(other.tag == "Castle")
+        {
+            CastleScript castle = other.gameObject.GetComponent<CastleScript>();
+
+            if(castle.playerNumber != playerNumber)
+                setCheckCanMove(false);
+        }
+
+    }
+
+    public void UnitMove()
+    {
+        if (playerNumber == 1 && getCheckCanMove())
+        {
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x + getMoveSpeed(),
+                gameObject.transform.localPosition.y, 0);
+        }
+        else if (playerNumber == 2 && getCheckCanMove())
+        {
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x - getMoveSpeed(),
+                gameObject.transform.localPosition.y, 0);
+        }
+    }
+
     public virtual IEnumerator Attack(UnitScript enemy)
     {
         enemy.setCurrentHP(enemy.getCurrentHP() - getDamage());
@@ -63,9 +104,9 @@ public class UnitScript : MonoBehaviour {
         }
     }
 
-    public virtual void Move()
+    public void castleAttack()
     {
-        print("Move");
+
     }
 
     public virtual void Initialize()
@@ -80,4 +121,5 @@ public class UnitScript : MonoBehaviour {
     {
         Circle,
     }
+
 }

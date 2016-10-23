@@ -71,6 +71,7 @@
     <Compile Include="Assets\Script\Player\PlayerLineButtonScript.cs" />
     <Compile Include="Assets\Script\Player\PlayerScript.cs" />
     <Compile Include="Assets\Script\Player\SpawnManager.cs" />
+    <Compile Include="Assets\Script\Unit\CastleScript.cs" />
     <Compile Include="Assets\Script\Unit\CircleUnitScript.cs" />
     <Compile Include="Assets\Script\Unit\UnitScript.cs" />
   </ItemGroup>
