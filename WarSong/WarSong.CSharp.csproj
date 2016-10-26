@@ -66,7 +66,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\ButtonTestScript.cs" />
     <Compile Include="Assets\Script\Map\LineScript.cs" />
     <Compile Include="Assets\Script\Player\PlayerLineButtonScript.cs" />
     <Compile Include="Assets\Script\Player\PlayerScript.cs" />

@@ -33,6 +33,11 @@ public class UnitScript : MonoBehaviour {
     public void setCheckCanMove(bool checkCanMove) { this.checkCanMove = checkCanMove; }
     public void setUnitType(UnitType unitType) { this.unitType = unitType; }
     
+    void Start()
+    {
+        StartCoroutine(DestroyUnit());
+    }
+
     public void SettingHPGuage()
     {
         hpGuage.fillAmount = currentHP / maxHP;
@@ -47,9 +52,10 @@ public class UnitScript : MonoBehaviour {
         this.moveSpeed = moveSpeed;
     }
 
+    //충돌되는 물체 감지
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Unit")
+        if(other.tag == "Unit") //적군일 때
         {
             UnitScript colliderUnit = other.gameObject.GetComponent<UnitScript>();
 
@@ -64,16 +70,40 @@ public class UnitScript : MonoBehaviour {
                 StartCoroutine(Attack(colliderUnit));
             }
         }
-        else if(other.tag == "Castle")
+        else if(other.tag == "Castle")  //상대 성일 때
         {
             CastleScript castle = other.gameObject.GetComponent<CastleScript>();
 
             if(castle.playerNumber != playerNumber)
+            {
                 setCheckCanMove(false);
+                StartCoroutine(CastleAttack(castle));
+            }
         }
-
     }
 
+    //유닛이 계속해서 적과 만난 상태일 때 움직이지 못하도록 함
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Unit")
+        {
+            UnitScript colliderUnit = other.gameObject.GetComponent<UnitScript>();
+            if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2 &&
+                playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
+                setCheckCanMove(false);
+        }
+        else if (other.tag == "Castle")
+        {
+            CastleScript castle = other.gameObject.GetComponent<CastleScript>();
+
+            if (castle.playerNumber != playerNumber)
+            {
+                setCheckCanMove(false);
+            }
+        }
+    }
+
+    //유닛 움직임
     public void UnitMove()
     {
         if (playerNumber == 1 && getCheckCanMove())
@@ -88,25 +118,28 @@ public class UnitScript : MonoBehaviour {
         }
     }
 
+    //적의 유닛을 공격
     public virtual IEnumerator Attack(UnitScript enemy)
     {
+        yield return new WaitForSeconds(1);
         enemy.setCurrentHP(enemy.getCurrentHP() - getDamage());
 
         if (enemy.getCurrentHP() > 0)
-        {
-            yield return new WaitForSeconds(1);
             StartCoroutine(Attack(enemy));
-        }
         else
-        {
             checkCanMove = true;
-            Destroy(enemy.gameObject);
-        }
     }
 
-    public void castleAttack()
+    //적의 성을 공격
+    public virtual IEnumerator CastleAttack(CastleScript enemyCastle)
     {
+        yield return new WaitForSeconds(1);
+        enemyCastle.setCurrentCastleHP(enemyCastle.getCurrentCastleHP() - getDamage());
 
+        if (enemyCastle.getCurrentCastleHP() > 0)
+            StartCoroutine(CastleAttack(enemyCastle));
+        else
+            checkCanMove = false;
     }
 
     public virtual void Initialize()
@@ -115,6 +148,18 @@ public class UnitScript : MonoBehaviour {
 
         playerNumber = spawnManager.playerNumber;
         checkCanMove = true;
+    }
+
+    public IEnumerator DestroyUnit()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (currentHP < 0)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+            StartCoroutine(DestroyUnit());
     }
 
     public enum UnitType
