@@ -94,9 +94,9 @@ public class UnitScript : MonoBehaviour {
         }
         else if (other.tag == "Castle")
         {
-            CastleScript castle = other.gameObject.GetComponent<CastleScript>();
+            CastleScript colliderCastle = other.gameObject.GetComponent<CastleScript>();
 
-            if (castle.playerNumber != playerNumber)
+            if (colliderCastle.playerNumber != playerNumber)
             {
                 setCheckCanMove(false);
             }

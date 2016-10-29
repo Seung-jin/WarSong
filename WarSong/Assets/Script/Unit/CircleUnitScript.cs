@@ -33,6 +33,8 @@ public class CircleUnitScript : UnitScript {
         setArrange(500);
         setDamage(3);
         setMoveSpeed(5);
+        setUnitType(UnitType.Circle);
+        gameObject.GetComponent<BoxCollider2D>().size = new Vector2(getArrange(), 150);
     }
 
     public override IEnumerator Attack(UnitScript enemy)
