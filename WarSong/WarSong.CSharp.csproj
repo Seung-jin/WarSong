@@ -72,7 +72,7 @@
     <Compile Include="Assets\Script\Player\SpawnManager.cs" />
     <Compile Include="Assets\Script\Unit\CastleScript.cs" />
     <Compile Include="Assets\Script\Unit\CircleUnitScript.cs" />
-    <Compile Include="Assets\Script\Unit\DetectSameUnitScript.cs" />
+    <Compile Include="Assets\Script\Unit\UnitCenterScript.cs" />
     <Compile Include="Assets\Script\Unit\UnitScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

@@ -55,9 +55,9 @@ public class UnitScript : MonoBehaviour {
     //충돌되는 물체 감지
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Unit") //적군일 때
+        if(other.tag == "UnitCenter") //적군일 때
         {
-            UnitScript colliderUnit = other.gameObject.GetComponent<UnitScript>();
+            UnitScript colliderUnit = other.gameObject.GetComponent<UnitCenterScript>().unitScript;
 
             if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2)
             {

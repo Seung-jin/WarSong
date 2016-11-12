@@ -22,7 +22,7 @@ public class CircleUnitScript : UnitScript {
         setMoveSpeed(3);
         setUnitType(UnitType.Circle);
 
-        gameObject.GetComponent<BoxCollider2D>().size = new Vector2(getArrange(), 150);
+        //gameObject.GetComponent<BoxCollider2D>().size = new Vector2(getArrange(), 150);
     }
 
     public CircleUnitScript(int maxHP, int arrange, int damage, int moveSpeed)
