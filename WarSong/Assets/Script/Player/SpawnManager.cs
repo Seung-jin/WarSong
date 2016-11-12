@@ -31,6 +31,20 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
+    public void OnClickRectangleUnitButton()
+    {
+        Debug.Log(playerNumber + "player : RectangleButton Click");
+        if(!checkSpawnDoing)
+        {
+            checkSpawnDoing = true;
+            unitType = UnitScript.UnitType.Rectangle;
+            newUnit = (GameObject)Instantiate(unitList[(int)unitType]);
+            RectangleUnitScript rectangleUnit = newUnit.GetComponent<RectangleUnitScript>();
+            rectangleUnit.spawnManager = this;
+            rectangleUnit.Initialize();
+        }
+    }
+
     /// <summary>
     /// 라인을 클릭했을 시 라인이 가지고 있던 유닛이 해당 라인에 소환이 됨
     /// </summary>

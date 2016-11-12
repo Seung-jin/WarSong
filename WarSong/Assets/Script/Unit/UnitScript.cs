@@ -14,6 +14,7 @@ public class UnitScript : MonoBehaviour {
 
     public SpawnManager spawnManager;
     public Image hpGuage;
+    public GameObject center;
 
     public int getPlayerNumber() { return playerNumber; }
     public float getMaxHP() { return maxHP; }
@@ -164,7 +165,8 @@ public class UnitScript : MonoBehaviour {
 
     public enum UnitType
     {
-        Circle,
+        Circle, //원거리 딜러 유닛
+        Rectangle   //근저 탱커 유닛
     }
 
 }

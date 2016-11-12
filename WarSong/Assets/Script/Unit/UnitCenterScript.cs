@@ -7,9 +7,10 @@ public class UnitCenterScript : MonoBehaviour {
     //트리거에 같은 아군 유닛이 들어오면 멈춤
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Unit")
+        if(other.tag == "UnitCenter")
         {
-            UnitScript triggerUnit = other.GetComponent<UnitScript>();
+            Debug.Log("in");
+            UnitScript triggerUnit = other.transform.parent.GetComponent<UnitScript>();
 
             if(unitScript.playerNumber == 1 &&
                 unitScript.playerNumber == triggerUnit.playerNumber &&
@@ -35,7 +36,8 @@ public class UnitCenterScript : MonoBehaviour {
     {
         if(other.tag == "Unit")
         {
-            UnitScript triggerUnit = other.GetComponent<UnitScript>();
+            Debug.Log("exit");
+            UnitScript triggerUnit = other.transform.parent.GetComponent<UnitScript>();
 
             if (unitScript.playerNumber == triggerUnit.playerNumber &&
                 unitScript.getUnitType() == triggerUnit.getUnitType() &&
