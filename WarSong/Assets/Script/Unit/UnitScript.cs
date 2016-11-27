@@ -14,7 +14,10 @@ public class UnitScript : MonoBehaviour {
 
     public SpawnManager spawnManager;
     public Image hpGuage;
+    public GameObject hpGuageBar;
     public UnitCenterScript center;
+    public Image unitImage;
+    public Sprite thisUnitImage;
 
     public int getPlayerNumber() { return playerNumber; }
     public float getMaxHP() { return maxHP; }
@@ -63,11 +66,17 @@ public class UnitScript : MonoBehaviour {
             if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2)
             {
                 setCheckCanMove(false);
+                unitImage.color = new Color(unitImage.color.r,
+                    unitImage.color.g, unitImage.color.b, 255);
+                //hpGuage.color = new Color(hpGuage.color.r,
+                //    hpGuage.color.g, hpGuage.color.r, 255);
+                hpGuageBar.SetActive(true);
                 StartCoroutine(Attack(colliderUnit));
             }
             else if (playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
             {
                 setCheckCanMove(false);
+                unitImage.sprite = thisUnitImage;
                 StartCoroutine(Attack(colliderUnit));
             }
         }
@@ -78,6 +87,7 @@ public class UnitScript : MonoBehaviour {
             if(castle.playerNumber != playerNumber)
             {
                 setCheckCanMove(false);
+                unitImage.sprite = thisUnitImage;
                 StartCoroutine(CastleAttack(castle));
             }
         }

@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour {
     private bool checkSpawnDoing = false;   //소환 대기중인지 아닌지. 유닛 소환 버튼을 누르면 true상태
     private GameObject newUnit;
     private UnitScript.UnitType unitType;
+    private bool checkClocking;
 
     public int playerNumber;
     public List<GameObject> lineList = new List<GameObject>();
@@ -28,6 +29,14 @@ public class SpawnManager : MonoBehaviour {
             CircleUnitScript circleUnit = newUnit.GetComponent<CircleUnitScript>();
             circleUnit.spawnManager = this;
             circleUnit.Initialize();
+            if (checkClocking)
+            {
+                circleUnit.unitImage.color = new Color(circleUnit.unitImage.color.r,
+                    circleUnit.unitImage.color.g, circleUnit.unitImage.color.b, 0);
+                //circleUnit.hpGuage.color = new Color(circleUnit.hpGuage.color.r,
+                //    circleUnit.hpGuage.color.g, circleUnit.hpGuage.color.r, 0);
+                circleUnit.hpGuageBar.SetActive(false);
+            }
         }
     }
 
@@ -59,6 +68,16 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
+    public void OnClickDiamondUnitButton()
+    {
+
+    }
+
+    public void OnClickClockingButton()
+    {
+        checkClocking = true;
+    }
+
     /// <summary>
     /// 라인을 클릭했을 시 라인이 가지고 있던 유닛이 해당 라인에 소환이 됨
     /// </summary>
@@ -73,5 +92,6 @@ public class SpawnManager : MonoBehaviour {
             newUnit.transform.localPosition = new Vector3(650, -162.5f, 0);
         newUnit.SetActive(true);
         checkSpawnDoing = false;
+        checkClocking = false;
     }
 }
