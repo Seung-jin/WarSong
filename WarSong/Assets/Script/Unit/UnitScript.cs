@@ -14,7 +14,7 @@ public class UnitScript : MonoBehaviour {
 
     public SpawnManager spawnManager;
     public Image hpGuage;
-    public GameObject center;
+    public UnitCenterScript center;
 
     public int getPlayerNumber() { return playerNumber; }
     public float getMaxHP() { return maxHP; }
@@ -145,8 +145,6 @@ public class UnitScript : MonoBehaviour {
 
     public virtual void Initialize()
     {
-        print("Initialize");
-
         playerNumber = spawnManager.playerNumber;
         checkCanMove = true;
     }
@@ -157,6 +155,8 @@ public class UnitScript : MonoBehaviour {
         if (currentHP < 0)
         {
             gameObject.SetActive(false);
+            if(center.triggerUnit != null)
+                center.triggerUnit.setCheckCanMove(true);
             Destroy(gameObject);
         }
         else

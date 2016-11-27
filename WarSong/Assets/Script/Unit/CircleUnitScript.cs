@@ -21,8 +21,6 @@ public class CircleUnitScript : UnitScript {
         setDamage(3);
         setMoveSpeed(3);
         setUnitType(UnitType.Circle);
-
-        //gameObject.GetComponent<BoxCollider2D>().size = new Vector2(getArrange(), 150);
     }
 
     public CircleUnitScript(int maxHP, int arrange, int damage, int moveSpeed)
@@ -34,7 +32,6 @@ public class CircleUnitScript : UnitScript {
         setDamage(3);
         setMoveSpeed(5);
         setUnitType(UnitType.Circle);
-        gameObject.GetComponent<BoxCollider2D>().size = new Vector2(getArrange(), 150);
     }
 
     public override IEnumerator Attack(UnitScript enemy)

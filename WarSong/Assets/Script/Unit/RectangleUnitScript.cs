@@ -17,9 +17,7 @@ public class RectangleUnitScript : UnitScript {
         setArrange(500);
         setDamage(3);
         setMoveSpeed(3);
-        setUnitType(UnitType.Circle);
-
-        //gameObject.GetComponent<BoxCollider2D>().size = new Vector2(getArrange(), 150);
+        setUnitType(UnitType.Rectangle);
     }
 
     public RectangleUnitScript(int maxHP, int arrange, int damage, int moveSpeed)
@@ -30,8 +28,7 @@ public class RectangleUnitScript : UnitScript {
         setArrange(500);
         setDamage(3);
         setMoveSpeed(5);
-        setUnitType(UnitType.Circle);
-        //gameObject.GetComponent<BoxCollider2D>().size = new Vector2(getArrange(), 150);
+        setUnitType(UnitType.Rectangle);
     }
 
     public override IEnumerator Attack(UnitScript enemy)
