@@ -29,14 +29,7 @@ public class SpawnManager : MonoBehaviour {
             CircleUnitScript circleUnit = newUnit.GetComponent<CircleUnitScript>();
             circleUnit.spawnManager = this;
             circleUnit.Initialize();
-            if (checkClocking)
-            {
-                circleUnit.unitImage.color = new Color(circleUnit.unitImage.color.r,
-                    circleUnit.unitImage.color.g, circleUnit.unitImage.color.b, 0);
-                //circleUnit.hpGuage.color = new Color(circleUnit.hpGuage.color.r,
-                //    circleUnit.hpGuage.color.g, circleUnit.hpGuage.color.r, 0);
-                circleUnit.hpGuageBar.SetActive(false);
-            }
+            CheckClocking(circleUnit);
         }
     }
 
@@ -51,6 +44,7 @@ public class SpawnManager : MonoBehaviour {
             RectangleUnitScript rectangleUnit = newUnit.GetComponent<RectangleUnitScript>();
             rectangleUnit.spawnManager = this;
             rectangleUnit.Initialize();
+            CheckClocking(rectangleUnit);
         }
     }
 
@@ -65,6 +59,7 @@ public class SpawnManager : MonoBehaviour {
             TriangleUnitScript triangleUnit = newUnit.GetComponent<TriangleUnitScript>();
             triangleUnit.spawnManager = this;
             triangleUnit.Initialize();
+            CheckClocking(triangleUnit);
         }
     }
 
@@ -76,6 +71,17 @@ public class SpawnManager : MonoBehaviour {
     public void OnClickClockingButton()
     {
         checkClocking = true;
+    }
+
+    //유닛 소환 직전 은폐버튼을 누른 상태인지 아닌지 체크
+    public void CheckClocking(UnitScript unit)
+    {
+        if (checkClocking)
+        {
+            unit.unitImage.color = new Color(unit.unitImage.color.r,
+                unit.unitImage.color.g, unit.unitImage.color.b, 0);
+            unit.hpGuageBar.SetActive(false);
+        }
     }
 
     /// <summary>

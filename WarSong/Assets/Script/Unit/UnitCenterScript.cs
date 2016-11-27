@@ -4,22 +4,12 @@ using System.Collections;
 public class UnitCenterScript : MonoBehaviour {
     public UnitScript unitScript;
     public UnitScript triggerUnit = null;
-    //public RaycastHit2D hit;
 
-    //void Update()
-    //{
-    //    Debug.DrawLine(transform.localPosition, new Vector3(transform.localPosition.x + 10f, transform.localPosition.y, 0));
-    //    hit = Physics2D.Raycast(transform.localPosition, Vector2.right, 100f);
-    //    if(hit.collider != null)
-    //    {
-    //        if(hit.collider.tag == "Unit")
-    //        {
-    //            unitScript.setCheckCanMove(false);
-    //            print(hit.collider.tag);
-
-    //        }
-    //    }
-    //}
+    void Update()
+    {
+        if (!gameObject.GetComponent<BoxCollider2D>().isTrigger)
+            unitScript.setCheckCanMove(true);        
+    }
 
     //트리거에 같은 아군 유닛이 들어오면 멈춤
     void OnTriggerEnter2D(Collider2D other)

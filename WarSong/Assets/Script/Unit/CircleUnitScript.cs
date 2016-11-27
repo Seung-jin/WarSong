@@ -10,6 +10,9 @@ public class CircleUnitScript : UnitScript {
     {
         base.UnitMove();
         base.SettingHPGuage();
+        base.DestroyUnit();
+        if (!gameObject.GetComponent<BoxCollider2D>().isTrigger)
+            setCheckCanMove(true);
     }
 
     public override void Initialize()

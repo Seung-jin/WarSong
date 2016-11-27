@@ -36,11 +36,6 @@ public class UnitScript : MonoBehaviour {
     public void setMoveSpeed(float moveSpeed) { this.moveSpeed = moveSpeed; }
     public void setCheckCanMove(bool checkCanMove) { this.checkCanMove = checkCanMove; }
     public void setUnitType(UnitType unitType) { this.unitType = unitType; }
-    
-    void Start()
-    {
-        StartCoroutine(DestroyUnit());
-    }
 
     public void SettingHPGuage()
     {
@@ -68,15 +63,15 @@ public class UnitScript : MonoBehaviour {
                 setCheckCanMove(false);
                 unitImage.color = new Color(unitImage.color.r,
                     unitImage.color.g, unitImage.color.b, 255);
-                //hpGuage.color = new Color(hpGuage.color.r,
-                //    hpGuage.color.g, hpGuage.color.r, 255);
                 hpGuageBar.SetActive(true);
                 StartCoroutine(Attack(colliderUnit));
             }
             else if (playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
             {
                 setCheckCanMove(false);
-                unitImage.sprite = thisUnitImage;
+                unitImage.color = new Color(unitImage.color.r,
+                    unitImage.color.g, unitImage.color.b, 255);
+                hpGuageBar.SetActive(true);
                 StartCoroutine(Attack(colliderUnit));
             }
         }
@@ -87,7 +82,9 @@ public class UnitScript : MonoBehaviour {
             if(castle.playerNumber != playerNumber)
             {
                 setCheckCanMove(false);
-                unitImage.sprite = thisUnitImage;
+                unitImage.color = new Color(unitImage.color.r,
+                    unitImage.color.g, unitImage.color.b, 255);
+                hpGuageBar.SetActive(true);
                 StartCoroutine(CastleAttack(castle));
             }
         }
@@ -96,10 +93,10 @@ public class UnitScript : MonoBehaviour {
     //유닛이 계속해서 적과 만난 상태일 때 움직이지 못하도록 함
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Unit")
+        if (other.tag == "UnitCenter")
         {
-            UnitScript colliderUnit = other.gameObject.GetComponent<UnitScript>();
-            if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2 &&
+            UnitScript colliderUnit = other.gameObject.GetComponent<UnitCenterScript>().unitScript;
+            if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2 ||
                 playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
                 setCheckCanMove(false);
         }
@@ -158,19 +155,17 @@ public class UnitScript : MonoBehaviour {
         playerNumber = spawnManager.playerNumber;
         checkCanMove = true;
     }
-
-    public IEnumerator DestroyUnit()
+    
+    //유닛의 체력이 0이하가 되면 파괴
+    public void DestroyUnit()
     {
-        yield return new WaitForSeconds(0.1f);
-        if (currentHP < 0)
+        if (currentHP <= 0)
         {
             gameObject.SetActive(false);
-            if(center.triggerUnit != null)
+            if (center.triggerUnit != null)
                 center.triggerUnit.setCheckCanMove(true);
-            Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
-        else
-            StartCoroutine(DestroyUnit());
     }
 
     public enum UnitType
