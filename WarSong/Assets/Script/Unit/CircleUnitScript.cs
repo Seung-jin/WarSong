@@ -19,19 +19,14 @@ public class CircleUnitScript : UnitScript {
         setCurrentHP(getMaxHP());
         setArrange(500);
         setDamage(3);
-        setMoveSpeed(3);
+        setMoveSpeed(2.5f);
         setUnitType(UnitType.Circle);
     }
 
     public CircleUnitScript(int maxHP, int arrange, int damage, int moveSpeed)
         : base(maxHP, arrange, damage, moveSpeed)
     {
-        setMaxHP(100);
-        setCurrentHP(100);
-        setArrange(500);
-        setDamage(3);
-        setMoveSpeed(5);
-        setUnitType(UnitType.Circle);
+        Initialize();
     }
 
     public override IEnumerator Attack(UnitScript enemy)

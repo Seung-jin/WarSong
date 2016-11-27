@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// 근접 탱커 유닛
-/// </summary>
-public class RectangleUnitScript : UnitScript {
+public class TriangleUnitScript : UnitScript {
 
     void Update()
     {
@@ -15,15 +12,15 @@ public class RectangleUnitScript : UnitScript {
     public override void Initialize()
     {
         base.Initialize();
-        setMaxHP(18);
+        setMaxHP(12);
         setCurrentHP(getMaxHP());
         setArrange(500);
-        setDamage(2);
-        setMoveSpeed(3);
+        setDamage(5);
+        setMoveSpeed(5);
         setUnitType(UnitType.Rectangle);
     }
 
-    public RectangleUnitScript(int maxHP, int arrange, int damage, int moveSpeed)
+    public TriangleUnitScript(int maxHP, int arrange, int damage, int moveSpeed)
         : base(maxHP, arrange, damage, moveSpeed)
     {
         Initialize();

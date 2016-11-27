@@ -45,6 +45,20 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
+    public void OnClickTriangleUnitButton()
+    {
+        Debug.Log(playerNumber + "player : RectangleButton Click");
+        if (!checkSpawnDoing)
+        {
+            checkSpawnDoing = true;
+            unitType = UnitScript.UnitType.Triangle;
+            newUnit = (GameObject)Instantiate(unitList[(int)unitType]);
+            TriangleUnitScript triangleUnit = newUnit.GetComponent<TriangleUnitScript>();
+            triangleUnit.spawnManager = this;
+            triangleUnit.Initialize();
+        }
+    }
+
     /// <summary>
     /// 라인을 클릭했을 시 라인이 가지고 있던 유닛이 해당 라인에 소환이 됨
     /// </summary>

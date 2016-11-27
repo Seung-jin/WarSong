@@ -8,7 +8,7 @@ public class UnitScript : MonoBehaviour {
     public float maxHP = 100;
     private int arrange;
     private int damage;
-    private int moveSpeed;
+    private float moveSpeed;
     private bool checkCanMove = true;
     private UnitType unitType;
 
@@ -21,7 +21,7 @@ public class UnitScript : MonoBehaviour {
     public float getCurrentHP() { return currentHP; }
     public int getArrange() { return arrange; }
     public int getDamage() { return damage; }
-    public int getMoveSpeed() { return moveSpeed; }
+    public float getMoveSpeed() { return moveSpeed; }
     public bool getCheckCanMove() { return checkCanMove; }
     public UnitType getUnitType() { return unitType; }
 
@@ -30,7 +30,7 @@ public class UnitScript : MonoBehaviour {
     public void setCurrentHP(float currentHP) { this.currentHP = currentHP; }
     public void setArrange(int arrange) { this.arrange = arrange; }
     public void setDamage(int damage) { this.damage = damage; }
-    public void setMoveSpeed(int moveSpeed) { this.moveSpeed = moveSpeed; }
+    public void setMoveSpeed(float moveSpeed) { this.moveSpeed = moveSpeed; }
     public void setCheckCanMove(bool checkCanMove) { this.checkCanMove = checkCanMove; }
     public void setUnitType(UnitType unitType) { this.unitType = unitType; }
     
@@ -166,7 +166,8 @@ public class UnitScript : MonoBehaviour {
     public enum UnitType
     {
         Circle, //원거리 딜러 유닛
-        Rectangle   //근저 탱커 유닛
+        Rectangle,   //근접 탱커 유닛
+        Triangle,   //강력하고 빠른 이동속도를 가진 근접 딜러 유닛
     }
 
 }

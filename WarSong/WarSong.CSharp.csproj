@@ -73,6 +73,7 @@
     <Compile Include="Assets\Script\Unit\CastleScript.cs" />
     <Compile Include="Assets\Script\Unit\CircleUnitScript.cs" />
     <Compile Include="Assets\Script\Unit\RectangleUnitScript.cs" />
+    <Compile Include="Assets\Script\Unit\TriangleUnitScript.cs" />
     <Compile Include="Assets\Script\Unit\UnitCenterScript.cs" />
     <Compile Include="Assets\Script\Unit\UnitScript.cs" />
   </ItemGroup>
