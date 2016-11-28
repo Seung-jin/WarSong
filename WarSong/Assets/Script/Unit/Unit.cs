@@ -89,38 +89,19 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    //유닛이 계속해서 적과 만난 상태일 때 움직이지 못하도록 함
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "UnitCenter")
-        {
-            Unit colliderUnit = other.gameObject.GetComponent<UnitCenter>().unitScript;
-            if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2 ||
-                playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
-                setCheckCanMove(false);
-        }
-        else if (other.tag == "Castle")
-        {
-            CastleScript colliderCastle = other.gameObject.GetComponent<CastleScript>();
-
-            if (colliderCastle.playerNumber != playerNumber)
-            {
-                setCheckCanMove(false);
-            }
-        }
-    }
-
     //유닛 움직임
     public void UnitMove()
     {
         if (playerNumber == 1 && getCheckCanMove())
         {
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x + getMoveSpeed(),
+            gameObject.transform.localPosition = new Vector3(
+                gameObject.transform.localPosition.x + getMoveSpeed(),
                 gameObject.transform.localPosition.y, 0);
         }
         else if (playerNumber == 2 && getCheckCanMove())
         {
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x - getMoveSpeed(),
+            gameObject.transform.localPosition = new Vector3(
+                gameObject.transform.localPosition.x - getMoveSpeed(),
                 gameObject.transform.localPosition.y, 0);
         }
     }

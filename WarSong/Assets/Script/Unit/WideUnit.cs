@@ -9,10 +9,7 @@ public class WideUnit : Unit {
         base.SettingHPGuage();
         base.DestroyUnit();
         if (!gameObject.GetComponent<CircleCollider2D>().isTrigger)
-        {
             setCheckCanMove(true);
-            print("in?");
-        }
     }
 
     public override void Initialize()
@@ -22,7 +19,7 @@ public class WideUnit : Unit {
         setCurrentHP(getMaxHP());
         setArrange(500);
         setDamage(5);
-        setMoveSpeed(4);
+        setMoveSpeed(3);
         setUnitType(UnitType.Wide);
     }
 

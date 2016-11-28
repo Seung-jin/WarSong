@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// 원거리 유닛
-/// </summary>
 public class DistanceUnit : Unit {
 
     void Update()
