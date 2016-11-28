@@ -67,15 +67,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Map\LineScript.cs" />
+    <Compile Include="Assets\Script\Player\ClockingButtonScript.cs" />
     <Compile Include="Assets\Script\Player\PlayerLineButtonScript.cs" />
     <Compile Include="Assets\Script\Player\PlayerScript.cs" />
     <Compile Include="Assets\Script\Player\SpawnManager.cs" />
+    <Compile Include="Assets\Script\Player\UnitSpawnButtonScript.cs" />
     <Compile Include="Assets\Script\Unit\CastleScript.cs" />
-    <Compile Include="Assets\Script\Unit\CircleUnitScript.cs" />
-    <Compile Include="Assets\Script\Unit\RectangleUnitScript.cs" />
-    <Compile Include="Assets\Script\Unit\TriangleUnitScript.cs" />
-    <Compile Include="Assets\Script\Unit\UnitCenterScript.cs" />
-    <Compile Include="Assets\Script\Unit\UnitScript.cs" />
+    <Compile Include="Assets\Script\Unit\DistanceUnit.cs" />
+    <Compile Include="Assets\Script\Unit\SpeedUnit.cs" />
+    <Compile Include="Assets\Script\Unit\TankerUnit.cs" />
+    <Compile Include="Assets\Script\Unit\Unit.cs" />
+    <Compile Include="Assets\Script\Unit\UnitCenter.cs" />
+    <Compile Include="Assets\Script\Unit\WideUnit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
