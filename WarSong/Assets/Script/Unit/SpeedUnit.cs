@@ -15,11 +15,11 @@ public class SpeedUnit : Unit {
     public override void Initialize()
     {
         base.Initialize();
-        setMaxHP(12);
+        setMaxHP(8);
         setCurrentHP(getMaxHP());
         setArrange(500);
         setDamage(5);
-        setMoveSpeed(5);
+        setMoveSpeed(4);
         setUnitType(UnitType.Speed);
     }
 

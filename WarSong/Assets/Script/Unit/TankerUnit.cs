@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// 근접 탱커 유닛
-/// </summary>
 public class TankerUnit : Unit {
 
     void Update()
@@ -18,11 +15,11 @@ public class TankerUnit : Unit {
     public override void Initialize()
     {
         base.Initialize();
-        setMaxHP(18);
+        setMaxHP(16);
         setCurrentHP(getMaxHP());
         setArrange(500);
         setDamage(2);
-        setMoveSpeed(3);
+        setMoveSpeed(2.5f);
         setUnitType(UnitType.Tanker);
     }
 

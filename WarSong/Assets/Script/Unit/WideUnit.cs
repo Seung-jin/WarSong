@@ -18,8 +18,8 @@ public class WideUnit : Unit {
         setMaxHP(7);
         setCurrentHP(getMaxHP());
         setArrange(500);
-        setDamage(5);
-        setMoveSpeed(3);
+        setDamage(3);
+        setMoveSpeed(1.8f);
         setUnitType(UnitType.Wide);
     }
 

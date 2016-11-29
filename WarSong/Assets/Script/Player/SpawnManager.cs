@@ -84,6 +84,7 @@ public class SpawnManager : MonoBehaviour {
     public void ClickClockingButton()
     {
         checkClocking = true;
+        print("click");
     }
 
     //유닛 소환 직전 은폐버튼을 누른 상태인지 아닌지 체크

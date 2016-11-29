@@ -13,12 +13,14 @@ public class ClockingButtonScript : MonoBehaviour
     public int remainClocking;
 
     private const int MAX_CLOCKING = 3;
+    private bool checkDoingRemain;  //쿨타임이 돌고 있는지 체크
+    private bool checkDoingFill;    //은폐 횟수를 채우고 있는지 체크
 
     void Update()
     {
         if (remainClocking <= 0)
             clockingButton.enabled = false;
-        else
+        else if (remainClocking > 0 && !checkDoingRemain)
             clockingButton.enabled = true;
 
         if (remainClocking >= MAX_CLOCKING)
@@ -33,16 +35,20 @@ public class ClockingButtonScript : MonoBehaviour
         remainClocking = 0;
         remainClockingText.text = remainClocking + "";
         StartCoroutine(FillRemainClocking());
+        checkDoingRemain = false;
+        checkDoingFill = false;
     }
 
     public void SettingData()
     {
         remainTime = 0;
         clockingButton.enabled = false;
-        StartCoroutine(PlusRemainTime());
+        if(!checkDoingRemain)
+            StartCoroutine(PlusRemainTime());
         remainClocking--;
         remainClockingText.text = remainClocking + "";
-        StartCoroutine(FillRemainClocking());
+        if(!checkDoingFill)
+            StartCoroutine(FillRemainClocking());
     }
 
     IEnumerator PlusRemainTime()
@@ -54,9 +60,13 @@ public class ClockingButtonScript : MonoBehaviour
         {
             remainTime = coolTime;
             clockingButton.enabled = true;
+            checkDoingRemain = false;
+            StopCoroutine(PlusRemainTime());
         }
         else
         {
+            clockingButton.enabled = false;
+            checkDoingRemain = true;
             StartCoroutine(PlusRemainTime());
         }
     }
@@ -70,6 +80,11 @@ public class ClockingButtonScript : MonoBehaviour
             remainClocking++;
         remainClockingText.text = remainClocking + "";
         if (remainClocking < MAX_CLOCKING)
+        {
             StartCoroutine(FillRemainClocking());
+            checkDoingFill = true;
+        }
+        else
+            checkDoingFill = false;
     }
 }

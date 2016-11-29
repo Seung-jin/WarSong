@@ -19,7 +19,7 @@ public class DistanceUnit : Unit {
         setCurrentHP(getMaxHP());
         setArrange(500);
         setDamage(3);
-        setMoveSpeed(2.5f);
+        setMoveSpeed(2f);
         setUnitType(UnitType.Distance);
     }
 

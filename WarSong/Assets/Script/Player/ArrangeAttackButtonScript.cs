@@ -16,12 +16,14 @@ public class ArrangeAttackButtonScript : MonoBehaviour {
     public int playerNumber;
 
     private const int MAX_Arrange_Attack = 2;   //광역기는 총 2개까지 저장 가능
+    private bool checkDoingRemain;  //쿨타임이 돌고 있는지 체크
+    private bool checkDoingFill;    //은폐 횟수를 채우고 있는지 체크
 
     void Update()
     {
         if (remainArrangeAttack <= 0)
             arrangeAttackButton.enabled = false;
-        else
+        else if (remainArrangeAttack > 0 && !checkDoingRemain)
             arrangeAttackButton.enabled = true;
 
         if (remainArrangeAttack >= MAX_Arrange_Attack)
@@ -36,16 +38,8 @@ public class ArrangeAttackButtonScript : MonoBehaviour {
         remainArrangeAttack = 0;
         remainArrangeAttackText.text = remainArrangeAttack + "";
         StartCoroutine(FillRemainArrangeAttack());
-    }
-
-    public void SettingData()
-    {
-        remainTime = 0;
-        arrangeAttackButton.enabled = false;
-        StartCoroutine(PlusRemainTime());
-        remainArrangeAttack--;
-        remainArrangeAttackText.text = remainArrangeAttack + "";
-        StartCoroutine(FillRemainArrangeAttack());
+        checkDoingRemain = false;
+        checkDoingFill = false;
     }
 
     IEnumerator PlusRemainTime()
@@ -57,9 +51,13 @@ public class ArrangeAttackButtonScript : MonoBehaviour {
         {
             remainTime = coolTime;
             arrangeAttackButton.enabled = true;
+            checkDoingRemain = false;
+            StopCoroutine(PlusRemainTime());
         }
         else
         {
+            arrangeAttackButton.enabled = false;
+            checkDoingRemain = true;
             StartCoroutine(PlusRemainTime());
         }
     }
@@ -73,7 +71,12 @@ public class ArrangeAttackButtonScript : MonoBehaviour {
             remainArrangeAttack++;
         remainArrangeAttackText.text = remainArrangeAttack + "";
         if (remainArrangeAttack < MAX_Arrange_Attack)
+        {
             StartCoroutine(FillRemainArrangeAttack());
+            checkDoingFill = true;
+        }
+        else
+            checkDoingFill = false;
     }
 
     public void AttackAllEnemy()
@@ -94,8 +97,13 @@ public class ArrangeAttackButtonScript : MonoBehaviour {
             }
             remainArrangeAttack--;
             remainArrangeAttackText.text = remainArrangeAttack + "";
-            if (remainArrangeAttack == 0)
+            if (remainArrangeAttack == 0 && !checkDoingFill)
                 StartCoroutine(FillRemainArrangeAttack());
+
+            remainTime = 0;
+            arrangeAttackButton.enabled = false;
+            if (!checkDoingRemain)
+                StartCoroutine(PlusRemainTime());
         }
     }
 }
