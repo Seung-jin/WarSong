@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Map\LineScript.cs" />
+    <Compile Include="Assets\Script\Player\ArrangeAttackButtonScript.cs" />
     <Compile Include="Assets\Script\Player\ClockingButtonScript.cs" />
     <Compile Include="Assets\Script\Player\PlayerLineButtonScript.cs" />
     <Compile Include="Assets\Script\Player\PlayerScript.cs" />

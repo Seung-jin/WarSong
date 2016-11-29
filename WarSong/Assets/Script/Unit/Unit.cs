@@ -89,6 +89,32 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "UnitCenter") //적군일 때
+        {
+            Unit colliderUnit = other.gameObject.GetComponent<UnitCenter>().unitScript;
+
+            if (playerNumber == 1 && colliderUnit.getPlayerNumber() == 2)
+            {
+                setCheckCanMove(false);
+            }
+            else if (playerNumber == 2 && colliderUnit.getPlayerNumber() == 1)
+            {
+                setCheckCanMove(false);
+            }
+        }
+        else if (other.tag == "Castle")  //상대 성일 때
+        {
+            CastleScript castle = other.gameObject.GetComponent<CastleScript>();
+
+            if (castle.playerNumber != playerNumber)
+            {
+                setCheckCanMove(false);
+            }
+        }
+    }
+
     //유닛 움직임
     public void UnitMove()
     {
@@ -155,5 +181,4 @@ public class Unit : MonoBehaviour {
         Speed,   //강력하고 빠른 이동속도를 가진 근접 딜러 유닛
         Wide    //광범위 공격을 하는 지원 유닛
     }
-
 }
